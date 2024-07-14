@@ -50,6 +50,13 @@ function PopularProductCart({ productItem }) {
                 <FiShoppingCart></FiShoppingCart> Add
               </button>
             </div>
+            {/* sold */}
+
+            {productItem?.totalSold && (
+              <p className="font-lato text-sm text-black-25">
+                Sold: {productItem?.soldOut}/{productItem?.totalSold}
+              </p>
+            )}
           </div>
         </div>
       </div>
