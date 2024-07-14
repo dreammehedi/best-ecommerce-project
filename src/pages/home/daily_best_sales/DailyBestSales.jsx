@@ -1,7 +1,7 @@
 import ProductsTopSection from "../../../components/home/ProductsTopSection";
 const productCategoryItemsData = ["Featured", "Popular", "New Added"];
 
-function DailyBestSeles() {
+function DailyBestSales() {
   return (
     <>
       {/* daily best seles */}
@@ -19,4 +19,4 @@ function DailyBestSeles() {
   );
 }
 
-export default DailyBestSeles;
+export default DailyBestSales;
