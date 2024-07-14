@@ -80,7 +80,7 @@ function PopularProducts() {
         {/* top section */}
         <ProductsTopSection
           title={"Popular Products"}
-          productCategoryItemsData={productCategoryItemsData}
+          categoryItemsData={productCategoryItemsData}
         ></ProductsTopSection>
 
         {/* main section */}
