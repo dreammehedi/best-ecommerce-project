@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-function ProductsTopSection({ title, productCategoryItemsData }) {
+function ProductsTopSection({ title, categoryItemsData }) {
   return (
     <>
       <div className="container flex flex-col lg:flex-row justify-between items-center py-2 gap-6">
@@ -10,7 +10,7 @@ function ProductsTopSection({ title, productCategoryItemsData }) {
 
         {/* category */}
         <ul className="flex flex-wrap justify-center lg:justify-end items-center gap-4 md:gap-6 lg:gap-8">
-          {productCategoryItemsData?.map((productItem, ind) => {
+          {categoryItemsData?.map((productItem, ind) => {
             return (
               <li
                 key={ind}
@@ -28,6 +28,6 @@ function ProductsTopSection({ title, productCategoryItemsData }) {
 
 ProductsTopSection.propTypes = {
   title: PropTypes.string.isRequired,
-  productCategoryItemsData: PropTypes.array.isRequired,
+  categoryItemsData: PropTypes.array.isRequired,
 };
 export default ProductsTopSection;
