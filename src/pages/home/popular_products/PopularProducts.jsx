@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import popularProduct1 from "../../../assets/popular_products/product-1.png";
 import popularProduct2 from "../../../assets/popular_products/product-2.png";
 import popularProduct3 from "../../../assets/popular_products/product-3.png";
@@ -73,15 +74,18 @@ const popularProductsData = [
 ];
 
 function PopularProducts() {
+  const { pathname } = useLocation();
   return (
     <>
       {/* popular products  */}
       <section className="py-8 md:py-10 lg:py-14">
         {/* top section */}
-        <ProductsTopSection
-          title={"Popular Products"}
-          categoryItemsData={productCategoryItemsData}
-        ></ProductsTopSection>
+        {pathname === "/cart" ? null : (
+          <ProductsTopSection
+            title={"Popular Products"}
+            categoryItemsData={productCategoryItemsData}
+          ></ProductsTopSection>
+        )}
 
         {/* main section */}
         <div className="container pt-8 md:pt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
