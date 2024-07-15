@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "../../components/home/Banner";
+import GreatOpotunityHome from "../../components/home/GreatOpotunityHome";
 import NewsletterHome from "../../components/home/NewsletterHome";
 import NextTopBannerProdduct from "../../components/home/NextTopBannerProdduct";
 import CategoryBasedProducts from "./category_bases_products/CategoryBasedProducts";
@@ -20,6 +21,7 @@ function Home() {
       <DealsOfTheDay></DealsOfTheDay>
       <CategoryBasedProducts></CategoryBasedProducts>
       <NewsletterHome></NewsletterHome>
+      <GreatOpotunityHome></GreatOpotunityHome>
     </>
   );
 }
