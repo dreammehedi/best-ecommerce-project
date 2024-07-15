@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "../../components/home/Banner";
+import NewsletterHome from "../../components/home/NewsletterHome";
 import NextTopBannerProdduct from "../../components/home/NextTopBannerProdduct";
 import CategoryBasedProducts from "./category_bases_products/CategoryBasedProducts";
 import DailyBestSales from "./daily_best_sales/DailyBestSales";
@@ -18,6 +19,7 @@ function Home() {
       <DailyBestSales></DailyBestSales>
       <DealsOfTheDay></DealsOfTheDay>
       <CategoryBasedProducts></CategoryBasedProducts>
+      <NewsletterHome></NewsletterHome>
     </>
   );
 }
