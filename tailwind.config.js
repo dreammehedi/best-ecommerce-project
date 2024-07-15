@@ -28,6 +28,9 @@ export default {
         "border-color": "#E1DFDF",
         "footer-bg": "#F7F7F8",
       },
+      // backgroundImage: {
+      //   "hero-background": "url('/images/hero-background.jpg')",
+      // },
     },
   },
   plugins: [],
