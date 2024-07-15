@@ -66,6 +66,9 @@ function FaqPage() {
 
           {/* faq content */}
           <div className="font-poppins text-base text-black">
+            <h1 className="font-bold text-black-21 text-2xl md:text-3xl lg:text-4xl mb-4">
+              FAQ
+            </h1>
             <Faq data={faqData} styles={styles} config={config} />
           </div>
         </div>
