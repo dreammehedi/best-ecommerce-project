@@ -6,6 +6,7 @@ import Checkout from "../pages/checkout/Checkout";
 import Error from "../pages/error/Error";
 import FaqPage from "../pages/faq/FaqPage";
 import Register from "../pages/register/Register";
+import Shop from "../pages/shop/Shop";
 import Home from "./../pages/home/Home";
 import Login from "./../pages/login/Login";
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/shop",
+        element: <Shop></Shop>,
       },
       {
         path: "/faq",
