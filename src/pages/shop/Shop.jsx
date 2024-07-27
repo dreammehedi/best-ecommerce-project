@@ -133,7 +133,7 @@ function Shop() {
           {/* shop right */}
           <div className="lg:col-span-9 h-fit">
             {/* shop right head */}
-            <div className="bg-[#F7F7F8] flex justify-between items-center px-4 py-2">
+            <div className="bg-[#F7F7F8] rounded-md flex flex-col md:flex-row gap-2 justify-between items-center px-4 py-2">
               <div className="flex items-center gap-2">
                 <button className="p-2 bg-orange-f5 rounded-md">
                   <FaTableCells className="text-white"></FaTableCells>
@@ -161,7 +161,7 @@ function Shop() {
 
             {/* popular products */}
             <div className="pt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              <div className="bg-white rounded-3xl overflow-hidden p-4 md:p-6 relative border border-border-color">
+              <div className="bg-white rounded-md overflow-hidden p-4 md:p-6 relative border border-border-color">
                 <div className="w-full ">
                   {/* image */}
                   <img
@@ -195,7 +195,7 @@ function Shop() {
                   </div>
                 </div>
               </div>
-              <div className="bg-white rounded-3xl overflow-hidden p-4 md:p-6 relative border border-border-color">
+              <div className="bg-white rounded-md overflow-hidden p-4 md:p-6 relative border border-border-color">
                 <div className="w-full ">
                   {/* image */}
                   <img
@@ -229,7 +229,7 @@ function Shop() {
                   </div>
                 </div>
               </div>
-              <div className="bg-white rounded-3xl overflow-hidden p-4 md:p-6 relative border border-border-color">
+              <div className="bg-white rounded-md overflow-hidden p-4 md:p-6 relative border border-border-color">
                 <div className="w-full ">
                   {/* image */}
                   <img
@@ -263,7 +263,7 @@ function Shop() {
                   </div>
                 </div>
               </div>
-              <div className="bg-white rounded-3xl overflow-hidden p-4 md:p-6 relative border border-border-color">
+              <div className="bg-white rounded-md overflow-hidden p-4 md:p-6 relative border border-border-color">
                 <div className="w-full ">
                   {/* image */}
                   <img
