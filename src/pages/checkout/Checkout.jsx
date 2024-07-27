@@ -1,3 +1,4 @@
+import { useForm } from "react-hook-form";
 import { FaStar } from "react-icons/fa";
 import mastercard from "../../assets/payment_icon/mastercard.png";
 import paypal from "../../assets/payment_icon/paypal.png";
@@ -5,6 +6,9 @@ import skrill from "../../assets/payment_icon/skrill.png";
 import visa from "../../assets/payment_icon/visa.png";
 
 function Checkout() {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
     <>
       {/* checkout */}
@@ -222,8 +226,228 @@ function Checkout() {
           </div>
 
           {/* checkout right */}
-          <div className="lg:col-span-8 p-4 md:p-6 rounded-md border border-border-color h-fit">
-            df
+          <div className="lg:col-span-8 space-y-5 h-fit">
+            {/* new customer */}
+            <div className="p-4 md:p-6 rounded-md border border-border-color space-y-3 ">
+              <h2 className="font-semibold text-xl text-black">New Customer</h2>
+
+              {/* checkout options */}
+              <p className="text-sm text-black-2b">Checkout Options:</p>
+
+              <div className="flex justify-between items-start gap-3">
+                {/* register account */}
+
+                <div>
+                  <input type="radio" name="account" />
+                  <label
+                    htmlFor="account"
+                    className="text-sm text-gray-7a ml-2"
+                  >
+                    Register Account
+                  </label>
+                </div>
+                {/*  Guest Account */}
+                <div>
+                  <input type="radio" name="account" />
+                  <label
+                    htmlFor="account"
+                    className="text-sm text-gray-7a ml-2"
+                  >
+                    Guest Account
+                  </label>
+                </div>
+              </div>
+              <p className="text-sm text-gray-7a">
+                {`By creating an account you will be able to shop faster, be up to
+                date on an order's status, and keep track of the orders you have
+                previously made.`}
+              </p>
+              <button className="px-3 py-2 rounded-md bg-orange-f5 text-white font-medium text-sm capitalize my-transition hover:bg-orange-f5/70 font-quicksand">
+                Continue
+              </button>
+
+              {/* returning customer */}
+              <div>
+                <h2 className="font-semibold text-xl text-black">
+                  Returning Customer
+                </h2>
+
+                {/* login form */}
+                <form
+                  className="pt-8 space-y-5"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <div className="space-y-2">
+                    <label className="text-[#444444] text-sm" htmlFor="email">
+                      Email Address*
+                    </label>
+                    <input
+                      className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
+                      type="email"
+                      placeholder="Enter Your Email"
+                      {...register("email", { required: true })}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      className="text-[#444444] text-sm"
+                      htmlFor="password"
+                    >
+                      Password*
+                    </label>
+                    <input
+                      className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
+                      type="password"
+                      placeholder="Enter Your Password"
+                      {...register("password", { required: true })}
+                    />
+                  </div>
+
+                  {/* remember me & forgot password */}
+                  <div className="flex justify-between text-sm items-center">
+                    <button
+                      className="bg-orange-f5 text-white px-5 py-3 rounded-md font-medium"
+                      type="submit"
+                    >
+                      Login
+                    </button>
+                    <button className="text-gray-77 text-sm">
+                      Forgot Password?
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            {/* billing detailes */}
+            <div className="p-4 md:p-6 rounded-md border border-border-color space-y-2">
+              <h2 className="font-semibold text-xl text-black">
+                Blilling Detailes
+              </h2>
+              <p className="text-sm text-black-2b">Checkout Options:</p>
+              <div className="flex justify-between items-start gap-3">
+                {/* checkout options */}
+
+                <div>
+                  <input type="radio" name="address" />
+                  <label
+                    htmlFor="address"
+                    className="text-sm text-gray-7a ml-2"
+                  >
+                    I want to use an existing address
+                  </label>
+                </div>
+                {/*  Guest Account */}
+                <div>
+                  <input type="radio" name="address" />
+                  <label
+                    htmlFor="address"
+                    className="text-sm text-gray-7a ml-2"
+                  >
+                    I want to use new address
+                  </label>
+                </div>
+              </div>
+
+              {/* form */}
+              <form className="pt-6 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+                <div className="space-y-2">
+                  <label className="text-[#444444] text-sm" htmlFor="firstName">
+                    First Name*
+                  </label>
+                  <input
+                    name="firstName"
+                    className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
+                    type="text"
+                    placeholder="Enter Your First Name"
+                    {...register("firstName", { required: true })}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[#444444] text-sm" htmlFor="lastName">
+                    Last Name*
+                  </label>
+                  <input
+                    name="lastName"
+                    className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
+                    type="text"
+                    placeholder="Enter Your Last Name"
+                    {...register("lastName", { required: true })}
+                  />
+                </div>
+                <div className="lg:col-span-2 space-y-2">
+                  <label className="text-[#444444] text-sm" htmlFor="lastName">
+                    Address
+                  </label>
+                  <input
+                    name="address"
+                    className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
+                    type="text"
+                    placeholder="Address Line 1"
+                    {...register("address")}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[#444444] text-sm" htmlFor="city">
+                    City*
+                  </label>
+                  <input
+                    name="city"
+                    className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
+                    type="text"
+                    placeholder="City"
+                    {...register("city", { required: true })}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[#444444] text-sm" htmlFor="postCode">
+                    Post Code
+                  </label>
+                  <input
+                    name="postCode"
+                    className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
+                    type="number"
+                    placeholder="Post Code"
+                    {...register("postCode")}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[#444444] text-sm" htmlFor="country">
+                    Country*
+                  </label>
+                  <input
+                    name="country"
+                    className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
+                    type="text"
+                    placeholder="Country"
+                    {...register("country", { required: true })}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label
+                    className="text-[#444444] text-sm"
+                    htmlFor="regionState"
+                  >
+                    Region State*
+                  </label>
+                  <input
+                    name="regionState"
+                    className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
+                    type="text"
+                    placeholder="Region/State"
+                    {...register("regionState", { required: true })}
+                  />
+                </div>
+              </form>
+              <div className="flex justify-end items-end">
+                <button
+                  className="ml-auto bg-orange-f5 text-white px-5 py-3 rounded-md font-medium"
+                  type="submit"
+                >
+                  Place Order
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
