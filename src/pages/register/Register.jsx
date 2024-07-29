@@ -1,10 +1,24 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import ErrorInputField from "../../components/home/ErrorInputField";
 import FoodTroveLogo from "../../shared/logo/FoodTroveLogo";
 
 const Register = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    // Capitalize country and city inputs
+    // data.country = data.country.replace(/\b\w/g, (char) => char.toUpperCase());
+    // data.city = data.city.replace(/\b\w/g, (char) => char.toUpperCase());
+    console.log(data);
+  };
+
+  // Predefined acceptable values for country and city
+  const acceptableCountries = ["USA", "Canada"];
+  const acceptableCities = ["New York", "Toronto"];
 
   return (
     <>
@@ -32,6 +46,9 @@ const Register = () => {
                 placeholder="Enter Your First Name"
                 {...register("firstName", { required: true })}
               />
+              {errors.firstName && (
+                <ErrorInputField field={"First Name"}></ErrorInputField>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-[#444444] text-sm" htmlFor="lastName">
@@ -44,6 +61,9 @@ const Register = () => {
                 placeholder="Enter Your Last Name"
                 {...register("lastName", { required: true })}
               />
+              {errors.lastName && (
+                <ErrorInputField field={"Last Name"}></ErrorInputField>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-[#444444] text-sm" htmlFor="email">
@@ -54,8 +74,17 @@ const Register = () => {
                 className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
                 type="email"
                 placeholder="Enter Your Email"
-                {...register("email", { required: true })}
+                {...register("email", {
+                  required: "Email is Required!",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "Invalid Email Address!",
+                  },
+                })}
               />
+              {errors.email && (
+                <ErrorInputField field={errors.email.message}></ErrorInputField>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-[#444444] text-sm" htmlFor="password">
@@ -66,8 +95,24 @@ const Register = () => {
                 className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
                 type="password"
                 placeholder="Enter Your Password"
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: "Password is Required!",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters long",
+                  },
+                  pattern: {
+                    value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])/,
+                    message:
+                      "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character",
+                  },
+                })}
               />
+              {errors.password && (
+                <span className="text-red-500 text-xs font-semibold">
+                  {errors.password.message}
+                </span>
+              )}
             </div>
             <div className="md:col-span-2 space-y-2">
               <label className="text-[#444444] text-sm" htmlFor="phone">
@@ -76,10 +121,23 @@ const Register = () => {
               <input
                 name="phone"
                 className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
-                type="number"
                 placeholder="Enter Your Phone Number"
                 {...register("phoneNumber", { required: true })}
+                type="tel"
+                {...register("phoneNumber", {
+                  required: "Phone number is Required!",
+                  pattern: {
+                    value:
+                      /^\+?(\d{1,3})?[-. ]?\(?\d{1,4}\)?[-. ]?\d{1,4}[-. ]?\d{1,9}$/,
+                    message: "Invalid phone number",
+                  },
+                })}
               />
+              {errors.phoneNumber && (
+                <span className="text-red-500 text-xs font-semibold">
+                  {errors.phoneNumber.message}
+                </span>
+              )}
             </div>
             <div className="md:col-span-2 space-y-2">
               <label className="text-[#444444] text-sm" htmlFor="address">
@@ -92,6 +150,9 @@ const Register = () => {
                 placeholder="Enter Your Address"
                 {...register("address", { required: true })}
               />
+              {errors.address && (
+                <ErrorInputField field={"Address"}></ErrorInputField>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-[#444444] text-sm" htmlFor="city">
@@ -102,8 +163,23 @@ const Register = () => {
                 className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
                 type="text"
                 placeholder="City"
-                {...register("city", { required: true })}
+                {...register("city", {
+                  required: "City is required",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Invalid city name",
+                  },
+                  validate: (value) =>
+                    acceptableCities.includes(
+                      value.replace(/\b\w/g, (char) => char.toUpperCase())
+                    ) || "Invalid city",
+                })}
               />
+              {errors.city && (
+                <span className="text-red-500 text-xs font-semibold">
+                  {errors.city.message}
+                </span>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-[#444444] text-sm" htmlFor="postCode">
@@ -124,10 +200,25 @@ const Register = () => {
               <input
                 name="country"
                 className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
-                type="number"
+                type="text"
                 placeholder="Country"
-                {...register("country", { required: true })}
+                {...register("country", {
+                  required: "Country is required",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Invalid country name",
+                  },
+                  validate: (value) =>
+                    acceptableCountries.includes(
+                      value.replace(/\b\w/g, (char) => char.toUpperCase())
+                    ) || "Invalid country",
+                })}
               />
+              {errors.country && (
+                <span className="text-red-500 text-xs font-semibold">
+                  {errors.country.message}
+                </span>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-[#444444] text-sm" htmlFor="regionState">
@@ -136,10 +227,13 @@ const Register = () => {
               <input
                 name="regionState"
                 className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
-                type="number"
+                type="text"
                 placeholder="Region/State"
                 {...register("regionState", { required: true })}
               />
+              {errors.regionState && (
+                <ErrorInputField field={"Region/State"}></ErrorInputField>
+              )}
             </div>
 
             {/* sign up or login */}

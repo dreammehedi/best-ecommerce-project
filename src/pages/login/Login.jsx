@@ -1,8 +1,13 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import ErrorInputField from "../../components/home/ErrorInputField";
 import FoodTroveLogo from "../../shared/logo/FoodTroveLogo";
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -27,6 +32,9 @@ const Login = () => {
                 placeholder="Enter Your Email"
                 {...register("email", { required: true })}
               />
+              {errors.email && (
+                <ErrorInputField field={"Email"}></ErrorInputField>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-[#444444] text-sm" htmlFor="password">
@@ -37,7 +45,10 @@ const Login = () => {
                 type="password"
                 placeholder="Enter Your Password"
                 {...register("password", { required: true })}
-              />
+              />{" "}
+              {errors.password && (
+                <ErrorInputField field={"Password"}></ErrorInputField>
+              )}
             </div>
 
             {/* remember me & forgot password */}

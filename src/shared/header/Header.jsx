@@ -5,7 +5,6 @@ import HeaderTop from "./HeaderTop";
 
 function Header() {
   const { pathname } = useLocation();
-  console.log(pathname);
   return (
     <>
       {/* header */}
