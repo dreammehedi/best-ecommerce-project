@@ -1,24 +1,100 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import ErrorInputField from "../../components/home/ErrorInputField";
+import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import FoodTroveLogo from "../../shared/logo/FoodTroveLogo";
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    // Capitalize country and city inputs
-    // data.country = data.country.replace(/\b\w/g, (char) => char.toUpperCase());
-    // data.city = data.city.replace(/\b\w/g, (char) => char.toUpperCase());
-    console.log(data);
+  const onSubmit = async (data) => {
+    const currentDate = new Date();
+    const userRegisterData = { ...data, currentDate };
+    console.log(userRegisterData);
+
+    try {
+      const response = await axiosPublic.post("/register", userRegisterData);
+      const resData = await response.data;
+      console.log(resData);
+
+      if (resData?.insertedId) {
+        reset();
+        Swal.fire({
+          title: "Registration Successful",
+          text: "You have successfully registered!",
+          icon: "success",
+          confirmButtonText: "Go to Login",
+          showCancelButton: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/login");
+          }
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Something went wrong while registering. Please try again later.",
+      });
+    }
   };
 
   // Predefined acceptable values for country and city
-  const acceptableCountries = ["USA", "Canada"];
-  const acceptableCities = ["New York", "Toronto"];
+  const acceptableCountries = [
+    "Bangladesh",
+    "USA",
+    "Canada",
+    "UK",
+    "Australia",
+    "Germany",
+    "France",
+    "Japan",
+    "China",
+    "India",
+    "Brazil",
+    "Russia",
+    "Italy",
+    "Spain",
+    "Mexico",
+    "South Africa",
+    "South Korea",
+    "Saudi Arabia",
+    "Argentina",
+    "Netherlands",
+    "Turkey",
+  ];
+
+  const acceptableCities = [
+    "Dhaka",
+    "New York",
+    "Toronto",
+    "London",
+    "Sydney",
+    "Berlin",
+    "Paris",
+    "Tokyo",
+    "Beijing",
+    "Mumbai",
+    "São Paulo",
+    "Moscow",
+    "Rome",
+    "Madrid",
+    "Mexico City",
+    "Johannesburg",
+    "Seoul",
+    "Riyadh",
+    "Buenos Aires",
+    "Amsterdam",
+    "Istanbul",
+  ];
 
   return (
     <>
