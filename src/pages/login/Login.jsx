@@ -1,14 +1,29 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import ErrorInputField from "../../components/home/ErrorInputField";
 import FoodTroveLogo from "../../shared/logo/FoodTroveLogo";
+import useAxiosPublic from "./../../hooks/axios/useAxiosPublic";
 const Login = () => {
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axiosPublic.post("/login", data);
+      const resData = await response.data;
+      console.log("resdata", resData);
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error?.message,
+        icon: "error",
+      });
+    }
+  };
 
   return (
     <>
