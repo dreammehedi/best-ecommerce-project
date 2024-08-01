@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorInputField from "../../components/home/ErrorInputField";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
@@ -8,6 +8,7 @@ import FoodTroveLogo from "../../shared/logo/FoodTroveLogo";
 const Register = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
   const {
     register,
     handleSubmit,
@@ -96,6 +97,9 @@ const Register = () => {
     "Istanbul",
   ];
 
+  if (token) {
+    return <Navigate to={"/"}></Navigate>;
+  }
   return (
     <>
       {/* register */}

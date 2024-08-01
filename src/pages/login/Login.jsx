@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorInputField from "../../components/home/ErrorInputField";
 import FoodTroveLogo from "../../shared/logo/FoodTroveLogo";
 import useAxiosPublic from "./../../hooks/axios/useAxiosPublic";
 const Login = () => {
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
   const {
     register,
     handleSubmit,
@@ -15,16 +17,29 @@ const Login = () => {
     try {
       const response = await axiosPublic.post("/login", data);
       const resData = await response.data;
-      console.log("resdata", resData);
+      if (resData?.success) {
+        localStorage.setItem("token", resData.token);
+        Swal.fire({
+          title: "Success",
+          text: "Logged In Successfully!",
+          icon: "success",
+          timer: 1000,
+        });
+        navigate("/");
+      }
     } catch (error) {
       Swal.fire({
         title: "Error",
-        text: error?.message,
+        text: "Credentials Error!",
         icon: "error",
+        timer: 1000,
       });
     }
   };
 
+  if (token) {
+    return <Navigate to={"/"}></Navigate>;
+  }
   return (
     <>
       {/* login */}
