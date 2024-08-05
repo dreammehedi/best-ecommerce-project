@@ -2,9 +2,13 @@ import { CiHeart, CiUser } from "react-icons/ci";
 import { FaSearch } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import useUserData from "./../../hooks/user/useUserData";
 import FoodTroveLogo from "./../logo/FoodTroveLogo";
 
 function HeaderBottom() {
+  const { user } = useUserData();
+  console.log(user);
+
   return (
     <>
       <div className="border-b border-border-color">
@@ -48,15 +52,22 @@ function HeaderBottom() {
 
           {/* cart info */}
           <ul className="flex justify-end items-center gap-4 md:gap-6 lg:gap-8">
-            <li>
-              <Link
-                to={"/login"}
-                className="flex items-center gap-1 font-medium"
-              >
-                <CiUser className="font-bold text-black text-xl"></CiUser>{" "}
-                Account
-              </Link>
-            </li>
+            {user ? (
+              <li className="font-bold text-black-2b">
+                {user.firstName} {user.lastName}
+              </li>
+            ) : (
+              <li>
+                <Link
+                  to={"/login"}
+                  className="flex items-center gap-1 font-medium"
+                >
+                  <CiUser className="font-bold text-black text-xl"></CiUser>{" "}
+                  Account
+                </Link>
+              </li>
+            )}
+
             <li className="hidden md:inline-block">
               <Link
                 to={"/wishing"}

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 function useUserData() {
   const [user, setUser] = useState(null);
-  const [userLoader, setUserLoader] = useState(false);
+  const [userLoader, setUserLoader] = useState(true);
 
   useEffect(() => {
     const userDataFindInToken = async () => {
@@ -13,7 +13,6 @@ function useUserData() {
 
         if (token) {
           const decodedToken = jwtDecode(token);
-          console.log(decodedToken);
           setUser(decodedToken);
         } else {
           console.error("No token found");
