@@ -4,14 +4,15 @@ import { FiShoppingCart } from "react-icons/fi";
 
 function PopularProductCart({ productItem }) {
   const {
-    status,
-    statusColor,
+    category,
+    availability,
+    popularity,
+    description,
     image,
-    postBy,
-    title,
+    brand,
+    name,
     rating,
-    currentPrice,
-    previousPrice,
+    price,
   } = productItem;
 
   return (
@@ -21,32 +22,37 @@ function PopularProductCart({ productItem }) {
         <div className="w-full ">
           {/* status */}
           <span
-            className={`absolute top-0 left-0 px-6 md:px-8 py-2 text-white rounded-tl-3xl rounded-br-3xl capitalize ${statusColor}`}
+            className={`absolute top-0 left-0 px-6 md:px-8 py-2 text-black-25 rounded-tl-3xl rounded-br-3xl capitalize `}
           >
-            {status}
+            {popularity}
           </span>
           {/* image */}
           <img className="w-full h-[250px] object-fill" src={image} alt="" />
 
           {/* cart information */}
           <div className="pt-4 md:pt-6 space-y-3">
-            <span className="font-lato text-[#ADADAD]">Snack</span>
-            <h1 className="font-medium text-black-2b">{title}</h1>
+            <span className="font-lato text-[#ADADAD]">{category}</span>
+            <h1 className="font-medium text-black-2b">{name}</h1>
+            <p className="font-lato text-[#ADADAD] text-sm">{description}</p>
             <div className="flex items-center justify-start gap-4 md:gap-6 text-sm font-lato">
               <FaStar className="text-[#fcc044]"></FaStar>
               <span className="text-gray-b6">({rating})</span>
             </div>
             <p className="font-lato text-gray-b6">
-              By <span className="text-orange-f5">{postBy}</span>
+              By <span className="text-orange-f5">{brand}</span>
             </p>
             <div className="flex items-center justify-between gap-4">
               <p className="text-[18px] font-quicksand text-green-3b">
-                ${currentPrice}
+                ${price?.current}
                 <del className="text-sm text-gray-b6 ml-2">
-                  ${previousPrice}
+                  ${price?.original}
                 </del>
               </p>
-              <button className="rounded-md px-5 py-2 bg-orange-f5 my-transition hover:bg-orange-f5/70 text-white font-medium text-sm font-lato flex items-center gap-2">
+
+              <button
+                disabled={availability !== "In Stock" ? true : false}
+                className={` rounded-md px-5 py-2 bg-orange-f5 my-transition hover:bg-orange-f5/70 text-white font-medium text-sm font-lato flex items-center gap-2`}
+              >
                 <FiShoppingCart></FiShoppingCart> Add
               </button>
             </div>

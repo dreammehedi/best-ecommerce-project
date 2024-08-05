@@ -7,7 +7,6 @@ import FoodTroveLogo from "./../logo/FoodTroveLogo";
 
 function HeaderBottom() {
   const { user } = useUserData();
-  console.log(user);
 
   return (
     <>

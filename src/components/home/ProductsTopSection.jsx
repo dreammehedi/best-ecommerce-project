@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
-function ProductsTopSection({ title, categoryItemsData }) {
+function ProductsTopSection({
+  title,
+  setProductsPopularity,
+  categoryItemsData,
+}) {
   return (
     <>
       <div className="container flex flex-col lg:flex-row justify-between items-center py-2 gap-6">
@@ -13,6 +17,9 @@ function ProductsTopSection({ title, categoryItemsData }) {
           {categoryItemsData?.map((productItem, ind) => {
             return (
               <li
+                onClick={() => {
+                  setProductsPopularity(productItem);
+                }}
                 key={ind}
                 className="capitalize font-semibold font-quicksand text-black-25 my-transition hover:text-green-3b cursor-pointer"
               >
@@ -28,6 +35,7 @@ function ProductsTopSection({ title, categoryItemsData }) {
 
 ProductsTopSection.propTypes = {
   title: PropTypes.string.isRequired,
+  setProductsPopularity: PropTypes.func.isRequired,
   categoryItemsData: PropTypes.array.isRequired,
 };
 export default ProductsTopSection;
