@@ -16,20 +16,16 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    const currentDate = new Date();
-    const userRegisterData = { ...data, currentDate };
-    console.log(userRegisterData);
-
     try {
-      const response = await axiosPublic.post("/register", userRegisterData);
+      const response = await axiosPublic.post("/users", data);
       const resData = await response.data;
       console.log(resData);
 
-      if (resData?.insertedId) {
+      if (resData.success) {
         reset();
         Swal.fire({
           title: "Registration Successful",
-          text: "You have successfully registered!",
+          text: resData.message,
           icon: "success",
           confirmButtonText: "Go to Login",
           showCancelButton: false,
@@ -43,59 +39,60 @@ const Register = () => {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Something went wrong while registering. Please try again later.",
+        text: error?.response?.data?.message || "Something went wrong!",
+        timer: 1200,
       });
     }
   };
 
   // Predefined acceptable values for country and city
-  const acceptableCountries = [
-    "Bangladesh",
-    "USA",
-    "Canada",
-    "UK",
-    "Australia",
-    "Germany",
-    "France",
-    "Japan",
-    "China",
-    "India",
-    "Brazil",
-    "Russia",
-    "Italy",
-    "Spain",
-    "Mexico",
-    "South Africa",
-    "South Korea",
-    "Saudi Arabia",
-    "Argentina",
-    "Netherlands",
-    "Turkey",
-  ];
+  // const acceptableCountries = [
+  //   "Bangladesh",
+  //   "USA",
+  //   "Canada",
+  //   "UK",
+  //   "Australia",
+  //   "Germany",
+  //   "France",
+  //   "Japan",
+  //   "China",
+  //   "India",
+  //   "Brazil",
+  //   "Russia",
+  //   "Italy",
+  //   "Spain",
+  //   "Mexico",
+  //   "South Africa",
+  //   "South Korea",
+  //   "Saudi Arabia",
+  //   "Argentina",
+  //   "Netherlands",
+  //   "Turkey",
+  // ];
 
-  const acceptableCities = [
-    "Dhaka",
-    "New York",
-    "Toronto",
-    "London",
-    "Sydney",
-    "Berlin",
-    "Paris",
-    "Tokyo",
-    "Beijing",
-    "Mumbai",
-    "São Paulo",
-    "Moscow",
-    "Rome",
-    "Madrid",
-    "Mexico City",
-    "Johannesburg",
-    "Seoul",
-    "Riyadh",
-    "Buenos Aires",
-    "Amsterdam",
-    "Istanbul",
-  ];
+  // const acceptableCities = [
+  //   "Dhaka",
+  //   "New York",
+  //   "Toronto",
+  //   "London",
+  //   "Sydney",
+  //   "Berlin",
+  //   "Paris",
+  //   "Tokyo",
+  //   "Beijing",
+  //   "Mumbai",
+  //   "São Paulo",
+  //   "Moscow",
+  //   "Rome",
+  //   "Madrid",
+  //   "Mexico City",
+  //   "Johannesburg",
+  //   "Seoul",
+  //   "Riyadh",
+  //   "Buenos Aires",
+  //   "Amsterdam",
+  //   "Istanbul",
+  // ];
 
   if (token) {
     return <Navigate to={"/"}></Navigate>;
@@ -203,7 +200,7 @@ const Register = () => {
                 className="w-full px-4 py-3 border border-border-color rounded-md outline-none placeholder:text-sm text-gray-77"
                 placeholder="Enter Your Phone Number"
                 {...register("phoneNumber", { required: true })}
-                type="tel"
+                type="text"
                 {...register("phoneNumber", {
                   required: "Phone number is Required!",
                   pattern: {
@@ -249,10 +246,6 @@ const Register = () => {
                     value: /^[a-zA-Z\s]+$/,
                     message: "Invalid city name",
                   },
-                  validate: (value) =>
-                    acceptableCities.includes(
-                      value.replace(/\b\w/g, (char) => char.toUpperCase())
-                    ) || "Invalid city",
                 })}
               />
               {errors.city && (
@@ -288,10 +281,6 @@ const Register = () => {
                     value: /^[a-zA-Z\s]+$/,
                     message: "Invalid country name",
                   },
-                  validate: (value) =>
-                    acceptableCountries.includes(
-                      value.replace(/\b\w/g, (char) => char.toUpperCase())
-                    ) || "Invalid country",
                 })}
               />
               {errors.country && (
