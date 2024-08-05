@@ -7,7 +7,7 @@ function Banner() {
   return (
     <>
       {/* banner */}
-      <section className="bg-[#E6E6E6] w-full h-screen flex justify-center items-center max-h-[750px] relative">
+      <section className="bg-[#E6E6E6] w-full h-screen flex justify-center items-center min-h-[700px] max-h-[750px] relative">
         <div className="container py-16 justify-center items-center grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
           {/* banner content */}
           <div className="flex flex-col space-y-4 z-20">

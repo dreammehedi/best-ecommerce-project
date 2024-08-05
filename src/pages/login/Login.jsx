@@ -7,7 +7,9 @@ import useAxiosPublic from "./../../hooks/axios/useAxiosPublic";
 const Login = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const getToken = localStorage.getItem("token") || null;
+  console.log(getToken);
+
   const {
     register,
     handleSubmit,
@@ -21,7 +23,7 @@ const Login = () => {
         localStorage.setItem("token", JSON.stringify(resData.token));
         Swal.fire({
           title: "Success",
-          text: "Logged In Successfully!",
+          text: resData.message || "Logged In Successfully!",
           icon: "success",
           timer: 1000,
         });
@@ -37,7 +39,7 @@ const Login = () => {
     }
   };
 
-  if (token) {
+  if (getToken) {
     return <Navigate to={"/"}></Navigate>;
   }
   return (

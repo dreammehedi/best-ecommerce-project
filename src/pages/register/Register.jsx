@@ -8,7 +8,7 @@ import FoodTroveLogo from "../../shared/logo/FoodTroveLogo";
 const Register = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const getToken = localStorage.getItem("token") || null;
   const {
     register,
     handleSubmit,
@@ -43,56 +43,7 @@ const Register = () => {
     }
   };
 
-  // Predefined acceptable values for country and city
-  // const acceptableCountries = [
-  //   "Bangladesh",
-  //   "USA",
-  //   "Canada",
-  //   "UK",
-  //   "Australia",
-  //   "Germany",
-  //   "France",
-  //   "Japan",
-  //   "China",
-  //   "India",
-  //   "Brazil",
-  //   "Russia",
-  //   "Italy",
-  //   "Spain",
-  //   "Mexico",
-  //   "South Africa",
-  //   "South Korea",
-  //   "Saudi Arabia",
-  //   "Argentina",
-  //   "Netherlands",
-  //   "Turkey",
-  // ];
-
-  // const acceptableCities = [
-  //   "Dhaka",
-  //   "New York",
-  //   "Toronto",
-  //   "London",
-  //   "Sydney",
-  //   "Berlin",
-  //   "Paris",
-  //   "Tokyo",
-  //   "Beijing",
-  //   "Mumbai",
-  //   "São Paulo",
-  //   "Moscow",
-  //   "Rome",
-  //   "Madrid",
-  //   "Mexico City",
-  //   "Johannesburg",
-  //   "Seoul",
-  //   "Riyadh",
-  //   "Buenos Aires",
-  //   "Amsterdam",
-  //   "Istanbul",
-  // ];
-
-  if (token) {
+  if (getToken) {
     return <Navigate to={"/"}></Navigate>;
   }
   return (
