@@ -19,8 +19,6 @@ const Register = () => {
     try {
       const response = await axiosPublic.post("/users", data);
       const resData = await response.data;
-      console.log(resData);
-
       if (resData.success) {
         reset();
         Swal.fire({

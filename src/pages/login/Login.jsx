@@ -17,8 +17,8 @@ const Login = () => {
     try {
       const response = await axiosPublic.post("/login", data);
       const resData = await response.data;
-      if (resData?.success) {
-        localStorage.setItem("token", resData.token);
+      if (resData.success) {
+        localStorage.setItem("token", JSON.stringify(resData.token));
         Swal.fire({
           title: "Success",
           text: "Logged In Successfully!",
